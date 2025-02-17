@@ -1,0 +1,61 @@
+/* Оформление баннеров */
+
+.main-content {
+    margin-top: 20px;
+}
+
+.banners-container {
+    position: relative;
+    overflow: hidden;
+    width: 100%; /* Занимает всю ширину экрана */
+}
+
+.banners-wrapper {
+    display: flex;
+    transition: transform 0.8s cubic-bezier(0.645, 0.045, 0.355, 1); /* Более плавная анимация */
+    width: 100%;
+}
+
+.banner-item {
+    flex: 0 0 100%;
+    width: 100%; /* Каждый баннер занимает 100% ширины контейнера */
+}
+
+.banner-item img {
+    width: 100%; /* Изображение растягивается на всю ширину экрана */
+    height: auto;
+    display: block;
+    object-fit: cover; /* Обрезаем изображение, чтобы оно занимало всю область */
+    object-position: center; /* Центрируем изображение */
+}
+
+.banners-dots {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    background-color: transparent; /* Прозрачный фон */
+    align-items: center; /* Выравниваем точки по вертикали */
+}
+
+.banners-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: transparent; /* Прозрачный фон */
+    border: 2px solid rgba(255, 255, 255, 0.7); /* Белая обводка */
+    margin: 0 8px; /* Увеличиваем расстояние между точками */
+    cursor: pointer;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Добавляем тень */
+}
+
+.banners-dot.active {
+    background-color: #2E5B4C; /* Цвет активной точки (зеленый) */
+    border-color: #2E5B4C; /* Цвет обводки активной точки */
+}
+
+.banners-dot:hover {
+    background-color: rgba(255, 255, 255, 0.8); /* Более яркий цвет при наведении */
+}

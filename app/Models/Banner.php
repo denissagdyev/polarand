@@ -11,5 +11,5 @@ class Banner extends Model
     use HasFactory;
     use CrudTrait;
 
-    protected $fillable = ['title', 'image', 'link', 'is_active', 'position'];
+    protected $fillable = ['title', 'image', 'link', 'is_active'];
 }
