@@ -1,13 +1,30 @@
 * {
     background-color: #F0F0F0;
 }
+
 body {
-    width: 1920px;
+    background-color: #F0F0F0;
+    margin: 0; /* Убираем отступы body */
+    overflow-x: hidden; /* Предотвращаем гориз. прокрутку */
 }
 
+.container {
+    width: 100%;
+    max-width: 1920px;
+    margin: 0 auto;
+    padding: 0; /* Убираем горизонтальные отступы */
+    box-sizing: border-box;
+}
+.main-content {
+    width: 100%;
+    max-width: 1920px;
+    margin: 0 auto;
+    padding: 0; /* Убираем горизонтальные отступы */
+    box-sizing: border-box;
+}
 .header {
 
-    padding: 15px 0;
+    padding: 20px 0;
     height: 200px;
     font-family: 'Inter', sans-serif; /* Подключаем шрифт Inter */
 }
@@ -27,6 +44,7 @@ body {
     align-items: center;
     text-decoration: none;
     font-size: 20px;
+    margin-left: 100px;
 }
 
 .header__logo img {

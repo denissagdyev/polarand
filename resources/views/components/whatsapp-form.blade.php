@@ -3,10 +3,10 @@
         <div class="whatsapp-form__left">
             <div class="whatsapp-form__social">
                 <p class="soc">НАПИШЕМ В</p>
-                <a href="ССЫЛКА_НА_WHATSAPP" target="_blank">
+                <a href="https://api.whatsapp.com/send?phone=79850945520" target="_blank">
                     <i class="fab fa-whatsapp"></i>
                 </a>
-                <a href="ССЫЛКА_НА_ТЕЛЕГРАМ" target="_blank">
+                <a href="https://t.me/ndsmaster1" target="_blank">
                     <i class="fab fa-telegram"></i>
                 </a>
             </div>

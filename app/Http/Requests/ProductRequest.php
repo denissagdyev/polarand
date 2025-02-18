@@ -25,10 +25,12 @@ class ProductRequest extends FormRequest
     {
         return [
             'name' => 'required|min:2|max:255',
-            'description' => 'nullable',
+            'description' => 'required',
             'price' => 'required|numeric|min:0',
             'category_id' => 'required|exists:categories,id',
-            'subcategory_id' => 'required|exists:subcategories,id',
+            'subcategory_id' => 'exists:subcategories,id|nullable',
+            'short_description' => 'required',
+            'size' => 'required',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Пример валидации изображения
         ];
     }

@@ -23,6 +23,15 @@
         @else
             <p>Баннеры отсутствуют.</p>
         @endif
+        <x-whatsapp-form title="Узнайте о наших акциях" buttonText="Подписаться" />
+        <x-modular-baths :products="$modularBaths" />
+        <x-kupel-elite :products="$kupelElite" />
+        <x-kupel-comfort :products="$kupelComfort" />
+        <x-kupel-corner :products="$kupelCorner" />
+        <x-kupel-standart :products="$kupelStandart" />
+        <div class="preim">
+            <h2>ПРЕИМУЩЕСТВА <span class="polarand">POLARAND</span></h2>
+            <img src="images/preim.svg" alt="preimPhoto">
+        </div>
     </div>
-    <x-whatsapp-form title="Узнайте о наших акциях" buttonText="Подписаться" />
 @endsection

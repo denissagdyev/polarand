@@ -1,35 +1,39 @@
 /* Оформление баннеров */
 
-main {
-    max-width: 1980px;
-}
+
 .main-content {
-    width: 100%;
+    margin-top: -35px;
 }
 
 .banners-container {
     position: relative;
     overflow: hidden;
-    width: 100%; /* Занимает всю ширину экрана */
+    width: 100%;
+    /* Занимает всю ширину экрана */
 }
 
 .banners-wrapper {
     display: flex;
-    transition: transform 0.8s cubic-bezier(0.645, 0.045, 0.355, 1); /* Более плавная анимация */
+    transition: transform 0.8s cubic-bezier(0.645, 0.045, 0.355, 1);
+    /* Более плавная анимация */
     width: 100%;
 }
 
 .banner-item {
     flex: 0 0 100%;
-    width: 100%; /* Каждый баннер занимает 100% ширины контейнера */
+    width: 100%;
+    /* Каждый баннер занимает 100% ширины контейнера */
 }
 
 .banner-item img {
-    width: 100%; /* Изображение растягивается на всю ширину экрана */
+    width: 100%;
+    /* Изображение растягивается на всю ширину экрана */
     height: auto;
     display: block;
-    object-fit: cover; /* Обрезаем изображение, чтобы оно занимало всю область */
-    object-position: center; /* Центрируем изображение */
+    object-fit: cover;
+    /* Обрезаем изображение, чтобы оно занимало всю область */
+    object-position: center;
+    /* Центрируем изображение */
 }
 
 .banners-dots {
@@ -38,29 +42,38 @@ main {
     left: 50%;
     transform: translateX(-50%);
     display: flex;
-    background-color: transparent; /* Прозрачный фон */
-    align-items: center; /* Выравниваем точки по вертикали */
+    background-color: transparent;
+    /* Прозрачный фон */
+    align-items: center;
+    /* Выравниваем точки по вертикали */
 }
 
 .banners-dot {
     width: 12px;
     height: 12px;
     border-radius: 50%;
-    background-color: transparent; /* Прозрачный фон */
-    border: 2px solid rgba(255, 255, 255, 0.7); /* Белая обводка */
-    margin: 0 8px; /* Увеличиваем расстояние между точками */
+    background-color: transparent;
+    /* Прозрачный фон */
+    border: 2px solid rgba(255, 255, 255, 0.7);
+    /* Белая обводка */
+    margin: 0 8px;
+    /* Увеличиваем расстояние между точками */
     cursor: pointer;
     transition: background-color 0.3s ease, border-color 0.3s ease;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Добавляем тень */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    /* Добавляем тень */
 }
 
 .banners-dot.active {
-    background-color: #2E5B4C; /* Цвет активной точки (зеленый) */
-    border-color: #2E5B4C; /* Цвет обводки активной точки */
+    background-color: #2E5B4C;
+    /* Цвет активной точки (зеленый) */
+    border-color: #2E5B4C;
+    /* Цвет обводки активной точки */
 }
 
 .banners-dot:hover {
-    background-color: rgba(255, 255, 255, 0.8); /* Более яркий цвет при наведении */
+    background-color: rgba(255, 255, 255, 0.8);
+    /* Более яркий цвет при наведении */
 }
 
 /* Основной контейнер формы */
@@ -70,6 +83,7 @@ main {
     font-family: 'Inter', sans-serif;
     box-sizing: border-box;
     height: 150px;
+    width: 100%;
 }
 
 .whatsapp-form__inner {
@@ -77,7 +91,7 @@ main {
     align-items: center;
     background-color: transparent;
     gap: 50px;
-    
+    width: 100%;
 }
 
 .whatsapp-form__left {
@@ -99,27 +113,35 @@ main {
 
 .whatsapp-form__social p {
     background-color: transparent;
-    margin-right: 10px; /* Расстояние между текстом "Напишем в" и иконками */
-    font-size: 16px; /* Размер шрифта текста "Напишем в" */
+    margin-right: 10px;
+    /* Расстояние между текстом "Напишем в" и иконками */
+    font-size: 16px;
+    /* Размер шрифта текста "Напишем в" */
     font-weight: 300;
     color: #2E5B4C;
 }
+
 .whatsapp-form__social a {
     background-color: transparent;
     display: inline-block;
     margin: 0 5px;
-    color: #2E5B4C; /* Цвет иконок */
-    font-size: 36px; /* Размер иконок */
+    color: #2E5B4C;
+    /* Цвет иконок */
+    font-size: 36px;
+    /* Размер иконок */
     transition: transform 0.2s ease;
 }
-.whatsapp-form__social a i{
+
+.whatsapp-form__social a i {
     background-color: transparent;
 
 }
 
 .whatsapp-form__social a:hover {
-    transform: scale(1.2); /* Увеличение при наведении */
-    color: #3B7762; /* Изменение цвета при наведении */
+    transform: scale(1.2);
+    /* Увеличение при наведении */
+    color: #3B7762;
+    /* Изменение цвета при наведении */
 }
 
 .whatsapp-form__subtitle {
@@ -141,8 +163,10 @@ main {
 /* Правая часть (форма и соц. сети) */
 .whatsapp-form__right {
     text-align: center;
-    width: 500px; /* Занимает 50% ширины контейнера */
-    padding-left: 20px;  /* Добавим отступ слева */
+    width: 500px;
+    /* Занимает 50% ширины контейнера */
+    padding-left: 20px;
+    /* Добавим отступ слева */
     box-sizing: border-box;
     background-color: transparent;
     margin-right: auto;
@@ -159,7 +183,8 @@ main {
 .whatsapp-form__right form {
     background-color: transparent;
 }
-.whatsapp-form__right form .whatsapp-form__input-group{
+
+.whatsapp-form__right form .whatsapp-form__input-group {
     background-color: transparent;
 }
 
@@ -176,7 +201,8 @@ main {
 }
 
 .whatsapp-form__button {
-    background-color: #2E5B4C; /* Цвет кнопки Отправить */
+    background-color: #2E5B4C;
+    /* Цвет кнопки Отправить */
     color: #fff;
     border: none;
     padding: 12px 25px;
@@ -206,19 +232,23 @@ main {
     height: 16px;
     margin-right: 8px;
     cursor: pointer;
-    appearance: none; /* Убираем стандартное оформление чекбокса */
-    border: 1px solid #2E5B4C; /* Цвет рамки чекбокса */
+    appearance: none;
+    /* Убираем стандартное оформление чекбокса */
+    border: 1px solid #2E5B4C;
+    /* Цвет рамки чекбокса */
     border-radius: 3px;
     transition: background-color 0.2s ease, border-color 0.2s ease;
 }
 
 .whatsapp-form__checkbox input[type="checkbox"]:checked {
-    background-color: #2E5B4C; /* Цвет фона при выборе */
+    background-color: #2E5B4C;
+    /* Цвет фона при выборе */
     border-color: #2E5B4C;
 }
 
 .whatsapp-form__checkbox input[type="checkbox"]:checked::after {
-    content: '\2713'; /* Символ галочки (✓) */
+    content: '\2713';
+    /* Символ галочки (✓) */
     display: block;
     color: #fff;
     font-size: 12px;
@@ -234,7 +264,7 @@ main {
     cursor: pointer;
 }
 
-.whatsapp-form__checkbox label a{
+.whatsapp-form__checkbox label a {
     background-color: transparent;
     font-size: 12px;
     color: #2E5B4C;
@@ -242,10 +272,250 @@ main {
 }
 
 .whatsapp-form__error {
-    color: #D84315; /* Красный цвет для текста */
+    color: #D84315;
+    /* Красный цвет для текста */
     font-size: 12px;
     margin-top: 5px;
     padding: 5px;
-    text-align: left; /* Выравнивание по левому краю */
+    text-align: left;
+    /* Выравнивание по левому краю */
     border-radius: 4px;
+}
+
+/* Оформление модульных бань */
+.modular-baths {
+    padding: 20px;
+    max-width: 1920px;
+    border-bottom: 1px solid #2E5B4C;
+}
+
+.modular-baths__grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.modular-baths__item {
+    width: calc(25% - 20px);
+    margin-bottom: 20px;
+    perspective: 1000px;
+    border: 2px solid #2E5B4C;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    height: 540px;
+    /* Устанавливаем высоту карточки */
+}
+
+.modular-baths__card {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    /* Важно для 3D-анимации */
+    transition: transform 0.8s cubic-bezier(0.645, 0.045, 0.355, 1);
+    /* Анимация переворота */
+}
+
+.modular-baths__item:hover .modular-baths__card {
+    transform: rotateY(180deg);
+}
+
+.modular-baths__item-front,
+.modular-baths__item-back {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    /* Вывод контента вертикально */
+    justify-content: center;
+    /* Выравнивание по вертикали */
+    align-items: center;
+    /* Выравнивание по горизонтали */
+    backface-visibility: hidden;
+    /* Скрываем заднюю сторону */
+    box-sizing: border-box;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+}
+
+.modular-baths__item-front {
+    display: flex;
+    flex-direction: column;
+    height: 500px;
+    padding: 20px;
+    background-color: transparent;
+    align-items: center;
+    transform: rotateY(0deg);
+}
+
+.modular-baths__item-back {
+    transform: rotateY(180deg);
+    background-image: url("../images/bath.png");
+    /* Укажи путь к изображению */
+    background-size: cover;
+    /* Растягиваем изображение на всю область */
+    background-position: center;
+    /* Центрируем изображение */
+    
+}
+
+.modular-baths__item-front img {
+    max-width: 100%;
+    height: 45%;
+    object-fit: contain;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    background-color: transparent;
+}
+
+.modular-baths__item-title {
+    font-size: 21px;
+    font-weight: 300;
+    color: #FBFBFB;
+    font-family: 'Inter', sans-serif;
+    margin-bottom: 50px;
+    text-transform: uppercase;
+    background-color: #2E5B4C;
+    border-radius: 50px;
+
+
+    /* Выравнивание текста по центру */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 3px solid #2E5B4C;
+    /* Зеленая обводка */
+    padding: 5px;
+    /* Отступ текста от обводки */
+    box-sizing: border-box;
+    /* Чтобы padding не увеличивал ширину */
+}
+.kupelTitle {
+    border: 2px solid #1F3F34;
+    border-radius: 15px;
+    /* Зеленая обводка */
+    padding: 5px;
+    /* Отступ текста от обводки */
+    box-sizing: border-box;
+    font-weight: 400;
+    color: #1F3F34;
+    background-color: #ebebeb;
+
+}
+
+.modular-baths__item-back-content {
+    width: 100%;
+    background-color: transparent;
+}
+
+.modular-baths__item-back .modular-baths__item-back-content .modular-baths__item-description,
+.modular-baths__item-back .modular-baths__item-back-content .modular-baths__item-size,
+.modular-baths__item-back .modular-baths__item-back-content .modular-baths__item-price {
+    color: #FBFBFB;
+    background-color: transparent;
+}
+
+.modular-baths__item-description {
+    font-size: 16px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    line-height: 1.4;
+    margin-bottom: 5px;
+    margin-top: 20px;
+    color: #1F3F34;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    flex: 1 1 auto;
+    text-align: center;
+    padding: 10px;
+    margin-bottom: 0 !important;
+}
+
+.modular-baths__item-size,
+.modular-baths__item-price {
+    font-size: 16px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    line-height: 1.4;
+    margin-bottom: 5px;
+    margin-top: 20px;
+    color: #1F3F34;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    flex: 1 1 auto;
+    text-align: center;
+    padding: 10px;
+    margin-bottom: 0 !important;
+}
+
+.modular-baths__item-size {
+    margin-bottom: 10px;
+}
+
+.modular-baths__view-all {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    color: #2E5B4C;
+    font-size: 24px;
+    font-family: 'Inter', sans-serif;
+    text-decoration: none;
+    font-weight: 300;
+    padding: 10px 20px;
+    border-radius: 50px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    width: 290px;
+    height: 45px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.modular-baths__view-all:hover {
+    font-size: 24.15px;
+}
+
+
+
+.modular-baths h2 {
+    font-family: 'Inter', sans-serif;
+    font-size: 36px;
+    font-weight: 200;
+    color: #2E5B4C;
+    text-align: center;
+}
+
+.modular-baths__item p {
+    font-size: 14px;
+    line-height: 1.4;
+    margin-bottom: 5px;
+}
+
+/* Оформление преимуществ */
+
+.preim h2 {
+    font-family: 'Inter', sans-serif;
+    font-size: 36px;
+    font-weight: 500;
+    color: #2E5B4C;
+    text-align: center;
+}
+
+.preim h2 .polarand {
+    color: #1F3F34;
+}
+
+.preim img {
+    margin-left: 110px;
+    margin-top: 60px;
 }

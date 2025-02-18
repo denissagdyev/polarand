@@ -12,7 +12,7 @@ class Product extends Model
     use HasFactory;
     use CrudTrait;
 
-    protected $fillable = ['category_id', 'subcategory_id', 'name', 'description', 'price', 'image'];
+    protected $fillable = ['category_id', 'subcategory_id', 'name', 'description', 'price', 'image', 'short_description', 'size'];
 
     public function category(): BelongsTo
     {

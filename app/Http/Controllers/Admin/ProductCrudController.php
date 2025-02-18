@@ -39,7 +39,9 @@ class ProductCrudController extends CrudController
 
         CRUD::field('name');
         CRUD::field('description');
+        CRUD::field('short_description');
         CRUD::field('price');
+        CRUD::field('size');
 
         CRUD::field([
             'name' => 'category_id',
