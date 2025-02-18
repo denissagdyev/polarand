@@ -1,0 +1,216 @@
+* {
+    background-color: #F0F0F0;
+}
+
+body {
+    background-color: #F0F0F0;
+    margin: 0; /* Убираем отступы body */
+    overflow-x: hidden; /* Предотвращаем гориз. прокрутку */
+}
+
+.container {
+    width: 100%;
+    max-width: 1920px;
+    margin: 0 auto;
+    padding: 0; /* Убираем горизонтальные отступы */
+    box-sizing: border-box;
+}
+.main-content {
+    width: 100%;
+    max-width: 1920px;
+    margin: 0 auto;
+    padding: 0; /* Убираем горизонтальные отступы */
+    box-sizing: border-box;
+}
+.header {
+
+    padding: 20px 0;
+    height: 200px;
+    font-family: 'Inter', sans-serif; /* Подключаем шрифт Inter */
+}
+.phone {
+    background-color: transparent;
+    margin-right: 5px;
+}
+
+.header__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header__logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    font-size: 20px;
+    margin-left: 100px;
+}
+
+.header__logo img {
+    width: 273px;
+    height: 96px;
+    margin-right: 10px;
+}
+
+.header__logo span {
+    font-size: 14px;
+    color: #777;
+}
+
+.header__center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+}
+
+.header__nav {
+    display: flex;
+    list-style: none;
+    padding: 0;
+
+}
+
+.header__nav-link {
+    color: #2E5B4C;
+    font-size: 24px;
+    font-weight: bold;
+    text-decoration: none;
+    margin-left: 20px;
+    transition: color 0.3s ease;
+}
+
+.header__nav-link:hover {
+    color: #3b7762;
+}
+
+.header__search {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ced4da;
+    border-radius: 20px;
+    padding: 5px 10px;
+    margin-top: 70px; /* Отступ от навигации */
+    width: 100%; /* Занимает всю ширину */
+    max-width: 250px; /* Ограничиваем максимальную ширину */
+}
+
+.header__search-input {
+    border: none;
+    outline: none;
+    padding: 5px;
+    width: 100%;
+    font-size: 14px;
+}
+
+.header__search-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #555;
+}
+
+.header__contacts {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end; /* Выравниваем по правому краю */
+}
+
+.header__contacts-info {
+    text-align: right;
+    margin-bottom: 10px; /* Отступ перед кнопкой */
+    margin-right: 100px;
+}
+
+.header__worktime,
+.header__email,
+.header__phone {
+    display: flex;
+    align-items: center; 
+    color: #2E5B4C;
+    font-size: 14px;
+    text-decoration: none;
+    margin-bottom: 5px;
+    text-align: right;
+}
+
+.header__worktime i,
+.header__email i,
+.header__phone i {
+    margin-right: 8px; /* Расстояние между иконкой и текстом */
+    width: 25px; /* Фиксированная ширина для иконок */
+    height: 25px;
+    text-align: center; /* Центрируем иконку в контейнере */
+}
+
+.header__contacts-info > span:first-child {
+    margin-top: 0 !important;
+}
+.header__phone i {
+    margin-left: 10px;
+    align-items: center;
+}
+
+.header__phone {
+    font-size: 24px;
+    font-weight:500;
+    margin-left: 10px;
+    letter-spacing:2.3px;
+}
+
+.header__phone:hover {
+    color: #3b7762;
+}
+
+.header__worktime {
+    display: block;
+    font-size: 12px;
+    color: #2E5B4C;
+    font-size: 24px;
+    font-weight:300;
+    letter-spacing:0%;
+}
+
+.header__email {
+    display: block;
+    font-size: 12px;
+    color: #777;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    color: #2E5B4C;
+    font-size: 24px;
+    font-weight:300;
+    letter-spacing:-0.55px;
+}
+
+.header__email:hover {
+    color: #3b7762;
+}
+
+.header__callback {
+    background-color: #2E5B4C; /* Примерный цвет кнопки */
+    color: #fff;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 200;
+    transition: background-color 0.3s ease;
+    align-self: center; 
+    margin-right: 100px;
+    display: flex; /* Добавляем flex для выравнивания иконки */
+    align-items: center; /* Выравниваем иконку по центру */
+    justify-content: center; /* Выравниваем контент по центру */
+}
+
+.header__callback i {
+    margin-right: 5px; 
+    font-family: "FontAwesome";
+}
+
+
+.header__callback:hover {
+    background-color: #1d3a30; /* Более темный цвет при наведении */
+}
