@@ -1,7 +1,10 @@
 /* Оформление баннеров */
 
+main {
+    max-width: 1980px;
+}
 .main-content {
-    margin-top: 20px;
+    width: 100%;
 }
 
 .banners-container {
@@ -58,4 +61,191 @@
 
 .banners-dot:hover {
     background-color: rgba(255, 255, 255, 0.8); /* Более яркий цвет при наведении */
+}
+
+/* Основной контейнер формы */
+.whatsapp-form {
+    background-color: #CECECE;
+    padding: 20px;
+    font-family: 'Inter', sans-serif;
+    box-sizing: border-box;
+    height: 150px;
+}
+
+.whatsapp-form__inner {
+    display: flex;
+    align-items: center;
+    background-color: transparent;
+    gap: 50px;
+    
+}
+
+.whatsapp-form__left {
+    width: 500px;
+    height: 112px;
+    text-align: left;
+    padding-right: 20px;
+    box-sizing: border-box;
+    background-color: transparent;
+    margin-left: auto;
+}
+
+.whatsapp-form__social {
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    margin-top: -10px;
+}
+
+.whatsapp-form__social p {
+    background-color: transparent;
+    margin-right: 10px; /* Расстояние между текстом "Напишем в" и иконками */
+    font-size: 16px; /* Размер шрифта текста "Напишем в" */
+    font-weight: 300;
+    color: #2E5B4C;
+}
+.whatsapp-form__social a {
+    background-color: transparent;
+    display: inline-block;
+    margin: 0 5px;
+    color: #2E5B4C; /* Цвет иконок */
+    font-size: 36px; /* Размер иконок */
+    transition: transform 0.2s ease;
+}
+.whatsapp-form__social a i{
+    background-color: transparent;
+
+}
+
+.whatsapp-form__social a:hover {
+    transform: scale(1.2); /* Увеличение при наведении */
+    color: #3B7762; /* Изменение цвета при наведении */
+}
+
+.whatsapp-form__subtitle {
+    font-size: 24px;
+    font-weight: 500;
+    color: #1F3F34;
+    line-height: 1.4;
+    background-color: transparent;
+    margin-top: -1px;
+}
+
+.whatsapp-form__title {
+    color: #2E5B4C;
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+/* Правая часть (форма и соц. сети) */
+.whatsapp-form__right {
+    text-align: center;
+    width: 500px; /* Занимает 50% ширины контейнера */
+    padding-left: 20px;  /* Добавим отступ слева */
+    box-sizing: border-box;
+    background-color: transparent;
+    margin-right: auto;
+}
+
+/* Группа поля ввода */
+.whatsapp-form__input-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+
+}
+
+.whatsapp-form__right form {
+    background-color: transparent;
+}
+.whatsapp-form__right form .whatsapp-form__input-group{
+    background-color: transparent;
+}
+
+.whatsapp-form__input-group input {
+    background-color: transparent;
+    flex: 1;
+    padding: 12px 15px;
+    border: 1px solid #2E5B4C;
+    border-radius: 50px;
+    font-size: 14px;
+    box-sizing: border-box;
+    margin-right: 10px;
+    outline: none;
+}
+
+.whatsapp-form__button {
+    background-color: #2E5B4C; /* Цвет кнопки Отправить */
+    color: #fff;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+}
+
+.whatsapp-form__button:hover {
+    background-color: #1d3a30;
+}
+
+
+.whatsapp-form__checkbox {
+    background-color: transparent;
+    background-color: #CECECE;
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.whatsapp-form__checkbox input[type="checkbox"] {
+    background-color: transparent;
+    width: 16px;
+    height: 16px;
+    margin-right: 8px;
+    cursor: pointer;
+    appearance: none; /* Убираем стандартное оформление чекбокса */
+    border: 1px solid #2E5B4C; /* Цвет рамки чекбокса */
+    border-radius: 3px;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.whatsapp-form__checkbox input[type="checkbox"]:checked {
+    background-color: #2E5B4C; /* Цвет фона при выборе */
+    border-color: #2E5B4C;
+}
+
+.whatsapp-form__checkbox input[type="checkbox"]:checked::after {
+    content: '\2713'; /* Символ галочки (✓) */
+    display: block;
+    color: #fff;
+    font-size: 12px;
+    text-align: center;
+    line-height: 16px;
+    background-color: transparent;
+}
+
+.whatsapp-form__checkbox label {
+    background-color: transparent;
+    font-size: 12px;
+    color: #2E5B4C;
+    cursor: pointer;
+}
+
+.whatsapp-form__checkbox label a{
+    background-color: transparent;
+    font-size: 12px;
+    color: #2E5B4C;
+    cursor: pointer;
+}
+
+.whatsapp-form__error {
+    color: #D84315; /* Красный цвет для текста */
+    font-size: 12px;
+    margin-top: 5px;
+    padding: 5px;
+    text-align: left; /* Выравнивание по левому краю */
+    border-radius: 4px;
 }

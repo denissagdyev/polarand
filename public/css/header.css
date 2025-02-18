@@ -1,6 +1,9 @@
 * {
     background-color: #F0F0F0;
 }
+body {
+    width: 1920px;
+}
 
 .header {
 

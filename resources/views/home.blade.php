@@ -24,4 +24,5 @@
             <p>Баннеры отсутствуют.</p>
         @endif
     </div>
+    <x-whatsapp-form title="Узнайте о наших акциях" buttonText="Подписаться" />
 @endsection

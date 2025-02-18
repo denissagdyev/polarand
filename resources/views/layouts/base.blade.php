@@ -75,5 +75,6 @@
 
     @vite('resources/js/app.js')
     <script src="js/banner.js"></script>
+    <script src="js/whatsapp.js"></script>
 </body>
 </html>
