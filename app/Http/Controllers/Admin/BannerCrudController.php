@@ -29,6 +29,7 @@ class BannerCrudController extends CrudController
     public function setup()
     {
         CRUD::setModel(\App\Models\Banner::class);
+         CRUD::setRouteName('banner');
         CRUD::setRoute(config('backpack.base.route_prefix') . '/banner');
         CRUD::setEntityNameStrings('banner', 'banners');
     }
@@ -120,14 +121,19 @@ class BannerCrudController extends CrudController
 
             // Перемещаем загруженный файл из временной директории в постоянное хранилище
             if ($request->hasFile('image')) {
-                $file = $request->file('image');
-                $destinationPath = 'banners'; // Путь, куда нужно сохранить файл
-                $filename = $file->hashName(); // Генерируем уникальное имя
-                $path = $file->store($destinationPath, 'public');
+            $file = $request->file('image');
+            $filename = $file->getClientOriginalName(); // Можно использовать hashName() для уникальности
+            $destinationPath = '/home/d/denmaytp/denmaytp.beget.tech/public/storage/banners'; // Укажите полный путь
 
-                // Заменяем временный путь на конечное имя файла
-                $data['image'] = $filename;
+            try {
+                $file->move($destinationPath, $filename);
+                $data['image'] = $filename; // Сохраняем только имя файла
+            } catch (\Exception $e) {
+                \Log::error('Ошибка при загрузке файла: ' . $e->getMessage());
+                // Обработка ошибки
+                return back()->withErrors(['image' => 'Ошибка при загрузке файла']);
             }
+        }
 
             // Сохраняем данные в базу данных
             $item = Banner::create($data);
@@ -136,39 +142,53 @@ class BannerCrudController extends CrudController
             return redirect()->to($this->crud->route);
         }
 
-    public function update()
-    {
-        $this->crud->setRequest($this->crud->validateRequest());
-        $this->crud->unsetValidation();
+   public function update()
+{
+    $this->crud->setRequest($this->crud->validateRequest());
+    $this->crud->unsetValidation();
 
-        // Получаем данные из запроса
-        $request = $this->crud->getRequest();
-         $data = $request->request->all();
+    // Получаем данные из запроса
+    $request = $this->crud->getRequest();
+    $data = $request->request->all();
 
-        // Перемещаем загруженный файл из временной директории в постоянное хранилище
-        if ($request->hasFile('image')) {
-            $file = $request->file('image');
-            $destinationPath = 'banners'; // Путь, куда нужно сохранить файл
-            $filename = $file->hashName(); // Генерируем уникальное имя
-            $path = $file->store($destinationPath, 'public');
+    // Получаем модель баннера для обновления
+    $item = Banner::find($request->id);
 
-            // Удаляем старое изображение (если оно есть)
-            $oldImage = Banner::find($request->id)->image;
+    // Проверяем, был ли загружен новый файл
+    if ($request->hasFile('image')) {
+        $file = $request->file('image');
+        $filename = $file->getClientOriginalName();
+        $destinationPath = '/home/d/denmaytp/denmaytp.beget.tech/public/storage/banners'; // Полный путь
+
+        try {
+            // Перемещаем новый файл
+            $file->move($destinationPath, $filename);
+            $data['image'] = $filename; // Обновляем имя файла
+
+            // Удаляем старый файл (если он есть)
+            $oldImage = $item->image;
             if ($oldImage) {
-                Storage::disk('public')->delete($oldImage);
+                $oldImagePath = '/home/d/denmaytp/denmaytp.beget.tech/public/storage/banners/' . $oldImage;
+                if (file_exists($oldImagePath)) {
+                    unlink($oldImagePath);
+                } else {
+                    \Log::warning('Старое изображение не найдено: ' . $oldImagePath);
+                }
             }
-
-            // Заменяем временный путь на конечное имя файла
-            $data['image'] = $filename;
+        } catch (\Exception $e) {
+            \Log::error('Ошибка при загрузке или удалении файла: ' . $e->getMessage());
+            return back()->withErrors(['image' => 'Ошибка при загрузке или удалении файла']);
         }
-          $item = Banner::find($request->id);
-           $item->update($data);
-
-        // $this->crud->update( // старый код
-        //     $this->crud->entry->getKey(),
-        //     $this->crud->getStrippedSaveRequest($request)
-        // );
-
-        return redirect()->to($this->crud->route);
     }
+
+    // Обновляем данные баннера
+    $item->update([
+        'title' => $request->input('title'),
+        'image' => $data['image'] ?? $item->image, // Используем новое имя файла или старое, если файл не был загружен
+        'link' => $request->input('link'),
+        'is_active' => $request->input('is_active', false),
+    ]);
+
+    return redirect()->route('banner.index')->with('success', 'Баннер успешно обновлен!');
+}
 }

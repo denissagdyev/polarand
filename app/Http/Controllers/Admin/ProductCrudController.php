@@ -63,11 +63,11 @@ class ProductCrudController extends CrudController
 
         CRUD::field([
             'name' => 'image',
-    'label' => 'Изображение',
-    'type' => 'upload',
-    'disk' => 'public',
-    'prefix' => 'storage/products/',
-    'upload' => true,
+            'label' => 'Изображение',
+            'type' => 'upload',
+            'disk' => 'public',
+            'prefix' => 'storage/products/',
+            'upload' => true,
         ]);
     }
 
@@ -92,66 +92,97 @@ class ProductCrudController extends CrudController
         $this->setupListOperation();
     }
 
-    public function store()
-    {
-        $this->crud->setRequest($this->crud->validateRequest());
-        $this->crud->unsetValidation();
-    
-        // Получаем данные из запроса
-        $request = $this->crud->getRequest();
-        $data = $request->request->all();
-    
-        // Перемещаем загруженный файл из временной директории в постоянное хранилище
-        if ($request->hasFile('image')) {
-            $file = $request->file('image');
-            $destinationPath = 'products'; // Путь, куда нужно сохранить файл
-            $filename = $file->hashName(); // Генерируем уникальное имя
-            $path = $file->store($destinationPath, 'public');
-    
-            // Заменяем временный путь на конечное имя файла
-            $data['image'] = $filename;
+     public function store()
+{
+    $this->crud->setRequest($this->crud->validateRequest());
+    $this->crud->unsetValidation();
+
+    // Получаем данные из запроса
+    $request = $this->crud->getRequest();
+
+    // Обрабатываем загрузку изображения
+    if ($request->hasFile('image')) {
+        $file = $request->file('image');
+        $filename = $file->getClientOriginalName(); // Можно использовать hashName() для уникальности
+        $destinationPath = '/home/d/denmaytp/denmaytp.beget.tech/public/storage/products'; // Укажите полный путь
+
+        try {
+            $file->move($destinationPath, $filename);
+             $data['image'] = $filename; // Сохраняем только имя файла
+        } catch (\Exception $e) {
+            \Log::error('Ошибка при загрузке файла: ' . $e->getMessage());
+            // Обработка ошибки
+            return back()->withErrors(['image' => 'Ошибка при загрузке файла']);
         }
-    
-        // Сохраняем данные в базу данных
-        $item = Product::create($data);
-        // $this->crud->create($this->crud->getStrippedSaveRequest($request)); // Старый код
-    
-        return redirect()->to($this->crud->route);
     }
-    
-    public function update()
-    {
-        $this->crud->setRequest($this->crud->validateRequest());
-        $this->crud->unsetValidation();
-    
-        // Получаем данные из запроса
-        $request = $this->crud->getRequest();
-         $data = $request->request->all();
-    
-        // Перемещаем загруженный файл из временной директории в постоянное хранилище
-        if ($request->hasFile('image')) {
-            $file = $request->file('image');
-            $destinationPath = 'products'; // Путь, куда нужно сохранить файл
-            $filename = $file->hashName(); // Генерируем уникальное имя
-            $path = $file->store($destinationPath, 'public');
-    
-            // Удаляем старое изображение (если оно есть)
-            $oldImage = Product::find($request->id)->image;
+
+    // Создаем баннер, используя данные из запроса, включая имя файла
+    $product = Product::create([
+        'name' => $request->input('name'),
+        'description' => $request->input('description'),
+        'short_description' => $request->input('short_description'),
+        'price' => $request->input('price'),
+        'size' => $request->input('size'),
+        'category_id' => $request->input('category_id'),
+        'subcategory_id' => $request->input('subcategory_id'),
+        'image' => $filename, // Сохраняем только имя файла
+    ]);
+
+    // Возвращаемся к списку баннеров с сообщением об успехе
+    return redirect()->route('crud.product.index')->with('success', 'Товар успешно создан!');
+}
+
+   public function update()
+{
+     $this->crud->setRequest($this->crud->validateRequest());
+    $this->crud->unsetValidation();
+
+    // Получаем данные из запроса
+    $request = $this->crud->getRequest();
+    $data = $request->request->all();
+
+    // Получаем модель баннера для обновления
+    $item = Product::find($request->id);
+
+    // Проверяем, был ли загружен новый файл
+    if ($request->hasFile('image')) {
+        $file = $request->file('image');
+        $filename = $file->getClientOriginalName();
+        $destinationPath = '/home/d/denmaytp/denmaytp.beget.tech/public/storage/products'; // Полный путь
+
+        try {
+            // Перемещаем новый файл
+            $file->move($destinationPath, $filename);
+             $data['image'] = $filename; // Сохраняем имя файла
+
+            // Удаляем старый файл (если он есть)
+            $oldImage = $item->image;
             if ($oldImage) {
-                Storage::disk('public')->delete($oldImage);
+                $oldImagePath = '/home/d/denmaytp/denmaytp.beget.tech/public/storage/products/' . $oldImage;
+                if (file_exists($oldImagePath)) {
+                    unlink($oldImagePath);
+                } else {
+                    \Log::warning('Старое изображение не найдено: ' . $oldImagePath);
+                }
             }
-    
-            // Заменяем временный путь на конечное имя файла
-            $data['image'] = $filename;
+        } catch (\Exception $e) {
+            \Log::error('Ошибка при загрузке или удалении файла: ' . $e->getMessage());
+            return back()->withErrors(['image' => 'Ошибка при загрузке или удалении файла']);
         }
-          $item = Product::find($request->id);
-           $item->update($data);
-    
-        // $this->crud->update( // старый код
-        //     $this->crud->entry->getKey(),
-        //     $this->crud->getStrippedSaveRequest($request)
-        // );
-    
-        return redirect()->to($this->crud->route);
     }
+
+    // Обновляем данные баннера
+    $item->update([
+        'name' => $request->input('name'),
+        'description' => $request->input('description'),
+        'short_description' => $request->input('short_description'),
+        'price' => $request->input('price'),
+        'size' => $request->input('size'),
+        'category_id' => $request->input('category_id'),
+        'subcategory_id' => $request->input('subcategory_id'),
+        'image' => $filename,
+    ]);
+
+    return redirect()->route('crud.product.index')->with('success', 'Товар успешно обновлен!');
+}
 }
