@@ -19,6 +19,7 @@ class ProductCrudController extends CrudController
     public function setup()
     {
         CRUD::setModel(\App\Models\Product::class);
+        CRUD::setRouteName('product');
         CRUD::setRoute(config('backpack.base.route_prefix') . '/product');
         CRUD::setEntityNameStrings('product', 'products');
     }
@@ -92,7 +93,7 @@ class ProductCrudController extends CrudController
         $this->setupListOperation();
     }
 
-     public function store()
+   public function store()
 {
     $this->crud->setRequest($this->crud->validateRequest());
     $this->crud->unsetValidation();
@@ -129,7 +130,7 @@ class ProductCrudController extends CrudController
     ]);
 
     // Возвращаемся к списку баннеров с сообщением об успехе
-    return redirect()->route('crud.product.index')->with('success', 'Товар успешно создан!');
+    return redirect()->route('product.index')->with('success', 'Товар успешно создан!');
 }
 
    public function update()
@@ -183,6 +184,6 @@ class ProductCrudController extends CrudController
         'image' => $filename,
     ]);
 
-    return redirect()->route('crud.product.index')->with('success', 'Товар успешно обновлен!');
+    return redirect()->route('product.index')->with('success', 'Товар успешно обновлен!');
 }
 }

@@ -29,7 +29,7 @@ class BannerCrudController extends CrudController
     public function setup()
     {
         CRUD::setModel(\App\Models\Banner::class);
-         CRUD::setRouteName('banner');
+        CRUD::setRouteName('banner');
         CRUD::setRoute(config('backpack.base.route_prefix') . '/banner');
         CRUD::setEntityNameStrings('banner', 'banners');
     }
@@ -110,41 +110,45 @@ class BannerCrudController extends CrudController
         $this->setupListOperation();
     }
 
-       public function store()
-        {
-            $this->crud->setRequest($this->crud->validateRequest());
-            $this->crud->unsetValidation();
+     public function store()
+{
+    $this->crud->setRequest($this->crud->validateRequest());
+    $this->crud->unsetValidation();
 
-            // Получаем данные из запроса
-            $request = $this->crud->getRequest();
-            $data = $request->request->all();
+    // Получаем данные из запроса
+    $request = $this->crud->getRequest();
 
-            // Перемещаем загруженный файл из временной директории в постоянное хранилище
-            if ($request->hasFile('image')) {
-            $file = $request->file('image');
-            $filename = $file->getClientOriginalName(); // Можно использовать hashName() для уникальности
-            $destinationPath = '/home/d/denmaytp/denmaytp.beget.tech/public/storage/banners'; // Укажите полный путь
+    // Обрабатываем загрузку изображения
+    if ($request->hasFile('image')) {
+        $file = $request->file('image');
+        $filename = $file->getClientOriginalName(); // Можно использовать hashName() для уникальности
+        $destinationPath = '/home/d/denmaytp/denmaytp.beget.tech/public/storage/banners'; // Укажите полный путь
 
-            try {
-                $file->move($destinationPath, $filename);
-                $data['image'] = $filename; // Сохраняем только имя файла
-            } catch (\Exception $e) {
-                \Log::error('Ошибка при загрузке файла: ' . $e->getMessage());
-                // Обработка ошибки
-                return back()->withErrors(['image' => 'Ошибка при загрузке файла']);
-            }
+        try {
+            $file->move($destinationPath, $filename);
+             $data['image'] = $filename; // Сохраняем только имя файла
+        } catch (\Exception $e) {
+            \Log::error('Ошибка при загрузке файла: ' . $e->getMessage());
+            // Обработка ошибки
+            return back()->withErrors(['image' => 'Ошибка при загрузке файла']);
         }
+    }
 
-            // Сохраняем данные в базу данных
-            $item = Banner::create($data);
-            // $this->crud->create($this->crud->getStrippedSaveRequest($request)); // Старый код
+    // Создаем баннер, используя данные из запроса, включая имя файла
+    $banner = Banner::create([
+        'title' => $request->input('title'),
+        'image' => $filename, // Сохраняем только имя файла
+        'link' => $request->input('link'),
+        'is_active' => $request->input('is_active', false), // По умолчанию false, если не указано
+    ]);
 
-            return redirect()->to($this->crud->route);
-        }
+    // Возвращаемся к списку баннеров с сообщением об успехе
+    return redirect()->route('banner.index')->with('success', 'Баннер успешно создан!');
+}
 
    public function update()
 {
-    $this->crud->setRequest($this->crud->validateRequest());
+     $this->crud->setRequest($this->crud->validateRequest());
     $this->crud->unsetValidation();
 
     // Получаем данные из запроса
@@ -163,7 +167,7 @@ class BannerCrudController extends CrudController
         try {
             // Перемещаем новый файл
             $file->move($destinationPath, $filename);
-            $data['image'] = $filename; // Обновляем имя файла
+             $data['image'] = $filename; // Сохраняем имя файла
 
             // Удаляем старый файл (если он есть)
             $oldImage = $item->image;
