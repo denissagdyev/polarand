@@ -300,7 +300,6 @@
 .modular-baths__item {
     width: calc(25% - 20px);
     margin-bottom: 20px;
-    perspective: 1000px;
     border: 2px solid #2E5B4C;
     border-radius: 10px;
     overflow: hidden;
@@ -309,69 +308,29 @@
     /* Устанавливаем высоту карточки */
 }
 
+.modular-baths__item:hover { /* Добавили стиль для hover */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Добавляем тень при наведении */
+}
+
 .modular-baths__card {
     position: relative;
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+    justify-content: space-between; /* Distribute space evenly */
+    align-items: center;
     width: 100%;
     height: 100%;
-    transform-style: preserve-3d;
-    /* Важно для 3D-анимации */
-    transition: transform 0.8s cubic-bezier(0.645, 0.045, 0.355, 1);
-    /* Анимация переворота */
+    padding: 10px; /* Отступы, чтобы ничего не прилипало к краям */
+    box-sizing: border-box; /* Чтобы padding не добавлял ширину */
 }
 
-.modular-baths__item:hover .modular-baths__card {
-    transform: rotateY(180deg);
-}
-
-.modular-baths__item-front,
-.modular-baths__item-back {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    /* Вывод контента вертикально */
-    justify-content: center;
-    /* Выравнивание по вертикали */
-    align-items: center;
-    /* Выравнивание по горизонтали */
-    backface-visibility: hidden;
-    /* Скрываем заднюю сторону */
-    box-sizing: border-box;
-    border-radius: 10px;
-    padding: 20px;
-    text-align: center;
-}
-
-.modular-baths__item-front {
-    display: flex;
-    flex-direction: column;
-    height: 500px;
-    padding: 20px;
-    background-color: transparent;
-    align-items: center;
-    transform: rotateY(0deg);
-}
-
-.modular-baths__item-back {
-    transform: rotateY(180deg);
-    background-image: url("../images/bath.png");
-    /* Укажи путь к изображению */
-    background-size: cover;
-    /* Растягиваем изображение на всю область */
-    background-position: center;
-    /* Центрируем изображение */
-    
-}
-
-.modular-baths__item-front img {
+.modular-baths__item-image {
     max-width: 100%;
-    height: 45%;
-    object-fit: contain;
+    height: 250px; /* Увеличили высоту изображения */
+    object-fit: cover;
     border-radius: 10px;
     margin-bottom: 10px;
-    background-color: transparent;
+    background-color: #f9f9f9; /* Light background for the image */
 }
 
 .modular-baths__item-title {
@@ -379,46 +338,26 @@
     font-weight: 300;
     color: #FBFBFB;
     font-family: 'Inter', sans-serif;
-    margin-bottom: 50px;
+    margin-bottom: 10px; /* Increased margin */
     text-transform: uppercase;
     background-color: #2E5B4C;
     border-radius: 50px;
-
-
-    /* Выравнивание текста по центру */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 3px solid #2E5B4C;
-    /* Зеленая обводка */
-    padding: 5px;
-    /* Отступ текста от обводки */
+    text-align: center; /* Center the title text */
+    display: block; /* Take the full width */
+    padding: 5px 20px; /* Increased padding */
     box-sizing: border-box;
-    /* Чтобы padding не увеличивал ширину */
+    margin: 10px auto; /* Устанавливаем auto для левого и правого margin */
+    width: fit-content; /* Чтобы заголовок занимал необходимую ширину */
 }
+
 .kupelTitle {
     border: 2px solid #1F3F34;
     border-radius: 15px;
-    /* Зеленая обводка */
     padding: 5px;
-    /* Отступ текста от обводки */
     box-sizing: border-box;
     font-weight: 400;
     color: #1F3F34;
     background-color: #ebebeb;
-
-}
-
-.modular-baths__item-back-content {
-    width: 100%;
-    background-color: transparent;
-}
-
-.modular-baths__item-back .modular-baths__item-back-content .modular-baths__item-description,
-.modular-baths__item-back .modular-baths__item-back-content .modular-baths__item-size,
-.modular-baths__item-back .modular-baths__item-back-content .modular-baths__item-price {
-    color: #FBFBFB;
-    background-color: transparent;
 }
 
 .modular-baths__item-description {
@@ -426,16 +365,10 @@
     font-family: 'Inter', sans-serif;
     font-weight: 400;
     line-height: 1.4;
-    margin-bottom: 5px;
-    margin-top: 20px;
+    margin-bottom: 15px; /* Increased margin */
     color: #1F3F34;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    flex: 1 1 auto;
-    text-align: center;
-    padding: 10px;
-    margin-bottom: 0 !important;
+    text-align: center; /* Align the description to the center */
+    padding: 0 15px; /* Add horizontal padding */
 }
 
 .modular-baths__item-size,
@@ -444,17 +377,9 @@
     font-family: 'Inter', sans-serif;
     font-weight: 400;
     line-height: 1.4;
-    margin-bottom: 5px;
-    margin-top: 20px;
+    margin-bottom: 10px;
     color: #1F3F34;
-    display: -webkit-box;
-    -webkit-line-clamp: 4;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    flex: 1 1 auto;
-    text-align: center;
-    padding: 10px;
-    margin-bottom: 0 !important;
+    text-align: center; /* Center the size and price */
 }
 
 .modular-baths__item-size {
@@ -485,14 +410,13 @@
     font-size: 24.15px;
 }
 
-
-
 .modular-baths h2 {
     font-family: 'Inter', sans-serif;
     font-size: 36px;
     font-weight: 200;
     color: #2E5B4C;
     text-align: center;
+    margin-bottom: 30px; /* Increased margin */
 }
 
 .modular-baths__item p {
@@ -501,6 +425,26 @@
     margin-bottom: 5px;
 }
 
+.modular-baths__item-button {
+    display: block; /* Make the link behave like a block-level element */
+    background-color: #2E5B4C; /* Adjusted to match the title background */
+    color: white;
+    border: none;
+    text-align: center;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-decoration: none;
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    margin: 20px auto; /* Установили отступ сверху и снизу, auto для левого и правого */
+    width: fit-content;
+}
+
+.modular-baths__item-button:hover {
+    background-color: #1F3F34; /* Darker shade for hover effect */
+}
 /* Оформление преимуществ */
 
 .preim h2 {
@@ -520,4 +464,16 @@
     margin-top: 60px;
     margin-bottom: 60px;
     width:60%;
+}
+
+.banners-container {
+    -webkit-user-select: none; /* Safari */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+/Edge */
+    user-select: none; /* Standard */
+    -webkit-user-drag: none; /* Safari */
+    -khtml-user-drag: none; /* Konqueror */
+    -moz-user-drag: none; /* Firefox */
+    -o-user-drag: none; /* Opera */
+    user-drag: none;
 }

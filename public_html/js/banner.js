@@ -1,54 +1,72 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
+    const bannersContainer = document.querySelector('.banners-container');
     const bannersWrapper = document.querySelector('.banners-wrapper');
     const bannerItems = document.querySelectorAll('.banner-item');
-    const bannersContainer = document.querySelector('.banners-container');
-    const bannersDotsContainer = document.querySelector('.banners-dots');
-    const slideWidth = bannerItems[0].offsetWidth;
+    const bannersDots = document.querySelector('.banners-dots');
     let currentIndex = 0;
+    let translateX = 0;
+    let startX = 0;
+    let isDragging = false;
+    let animationID = null;
     let intervalId;
 
-    // Создаем точки
+    // Создание точек навигации
     bannerItems.forEach((_, index) => {
-        const dot = document.createElement('span');
+        const dot = document.createElement('div');
         dot.classList.add('banners-dot');
-        if (index === 0) {
-            dot.classList.add('active');
-        }
-        dot.addEventListener('click', () => {
-            goToSlide(index);
-            clearInterval(intervalId); // Останавливаем авто-перелистывание
-            startAutoSlide(); // Запускаем авто-перелистывание заново
-        });
-        bannersDotsContainer.appendChild(dot);
+        dot.addEventListener('click', () => goToSlide(index));
+        bannersDots.appendChild(dot);
     });
 
-    // Функция для перехода к определенному слайду
+    const dots = document.querySelectorAll('.banners-dot');
+
+    function updateDots() {
+        dots.forEach((dot, index) => {
+            dot.classList.toggle('active', index === currentIndex);
+        });
+    }
+
     function goToSlide(index) {
         currentIndex = index;
-        const translateValue = -slideWidth * index;
-        bannersWrapper.style.transform = `translateX(${translateValue}px)`;
-
-        // Обновляем активную точку
-        const dots = document.querySelectorAll('.banners-dot');
-        dots.forEach((dot, i) => {
-            dot.classList.toggle('active', i === currentIndex);
-        });
+        translateX = -currentIndex * 100;
+        bannersWrapper.style.transform = `translateX(${translateX}%)`;
+        updateDots();
+        resetInterval();
     }
 
-    // Функция для автоматического перелистывания
-    function startAutoSlide() {
-        intervalId = setInterval(() => {
-            currentIndex = (currentIndex + 1) % bannerItems.length;
-            goToSlide(currentIndex);
-        }, 30000); // 30 секунд
+    function nextSlide() {
+        currentIndex = (currentIndex + 1) % bannerItems.length;
+        goToSlide(currentIndex);
     }
 
-    startAutoSlide(); // Запускаем автоматическое перелистывание при загрузке страницы
+    function resetInterval() {
+        clearInterval(intervalId);
+        intervalId = setInterval(nextSlide, 5000);
+    }
 
-    // Добавляем обработчик события для изменения размера окна
-    window.addEventListener('resize', () => {
-        // Обновляем ширину слайда при изменении размера окна
-        slideWidth = bannerItems[0].offsetWidth;
-        goToSlide(currentIndex); // Переходим к текущему слайду
+    // Hammer instance для drag gesture
+    const hammer = new Hammer(bannersContainer);
+
+    hammer.on('panstart', function (ev) {
+        // Prevent default browser behavior during drag
+        ev.preventDefault();
     });
+
+    hammer.on('panleft panright', function (ev) {
+        // Prevent default browser behavior during drag
+        ev.preventDefault();
+        if (ev.type == "panleft") {
+            nextSlide();
+        } else if (ev.type == "panright") {
+            prevSlide();
+        }
+    });
+
+    function prevSlide() {
+        currentIndex = (currentIndex - 1 + bannerItems.length) % bannerItems.length;
+        goToSlide(currentIndex);
+    }
+
+    resetInterval();
+    updateDots();
 });
